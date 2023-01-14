@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright Mons Agency Ltd. Some rights reserved.
+ * See copying.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="cssAutoprefixProcessor"
+        type="Mons\CssAutoprefix\PreProcessor\Autoprefix">
+    </virtualType>
+    <virtualType name="AssetPreProcessorPool">
+        <arguments>
+            <argument name="preprocessors" xsi:type="array">
+                <item name="css" xsi:type="array">
+                    <!-- process just before minification -->
+                    <item name="css_autoprefix" xsi:type="array">
+                        <item name="after" xsi:type="string">
+                            module_notation</item>
+                        <item name="class" xsi:type="string">cssAutoprefixProcessor</item>
+                    </item>
+                    <item name="css_min" xsi:type="array">
+                        <item name="after" xsi:type="string">css_autoprefix</item>
+                        <!-- <item name="class" xsi:type="string">cssMinificationProcessor</item> -->
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>
